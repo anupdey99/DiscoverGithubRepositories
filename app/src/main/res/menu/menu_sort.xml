@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/actionSortByStar"
+        android:icon="@drawable/ic_star_outline"
+        android:iconTint="@color/text_color"
+        android:title="@string/sort_by_star"
+        app:showAsAction="never"
+        tools:targetApi="o" />
+
+    <item
+        android:id="@+id/actionSortByUpdate"
+        android:icon="@drawable/ic_calendar"
+        android:iconTint="@color/text_color"
+        android:title="@string/sort_by_update_date"
+        app:showAsAction="never"
+        tools:targetApi="o" />
+
+</menu>
