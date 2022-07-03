@@ -23,16 +23,36 @@ abstract class BaseRecyclerAdapter<T : Any, VB : ViewBinding> : RecyclerView.Ada
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<VB> {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return BaseViewHolder(initializeViewBinding(layoutInflater, parent, viewType))
+        val holder = BaseViewHolder(initializeViewBinding(layoutInflater, parent, viewType))
+        holder.binding.root.setOnClickListener {
+            if (holder.absoluteAdapterPosition != RecyclerView.NO_POSITION) {
+                listener?.invoke(
+                    differ.currentList[holder.absoluteAdapterPosition],
+                    holder.absoluteAdapterPosition,
+                    false
+                )
+            }
+        }
+        holder.binding.root.setOnLongClickListener {
+            if (holder.absoluteAdapterPosition != RecyclerView.NO_POSITION) {
+                listener?.invoke(
+                    differ.currentList[holder.absoluteAdapterPosition],
+                    holder.absoluteAdapterPosition,
+                    true
+                )
+            }
+            return@setOnLongClickListener true
+        }
+        return holder
     }
 
     override fun getItemCount() = differ.currentList.size
 
     class BaseViewHolder<VH : ViewBinding>(val binding: VH) : RecyclerView.ViewHolder(binding.root)
 
-    private var listener: ((item: T, isLong: Boolean) -> Unit)? = null
+    private var listener: ((item: T, position: Int, isLong: Boolean) -> Unit)? = null
 
-    fun setOnClickLister(listener: (item: T, isLong: Boolean) -> Unit) {
+    fun setOnClickLister(listener: (item: T, position: Int, isLong: Boolean) -> Unit) {
         this.listener = listener
     }
 }

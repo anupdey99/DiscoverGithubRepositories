@@ -17,6 +17,9 @@ class TopRepositoryAdapter @Inject constructor(
 
     override fun initializeViewBinding(layoutInflater: LayoutInflater, parent: ViewGroup, viewType: Int): ItemViewRepositoryBinding {
         val binding = ItemViewRepositoryBinding.inflate(layoutInflater, parent, false)
+        binding.root.setOnClickListener {
+
+        }
         return binding
     }
 

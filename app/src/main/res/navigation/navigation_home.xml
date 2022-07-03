@@ -11,6 +11,24 @@
         android:name="com.anupdey.app.discover_github_repositories.ui.top_repo.TopRepositoryFragment"
         android:label="@string/top_android_repo"
         tools:layout="@layout/fragment_top_repository"
+        >
+
+        <action
+            android:id="@+id/nav_repo_repoDetails"
+            app:destination="@id/repository_details_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/repository_details_fragment"
+        android:name="com.anupdey.app.discover_github_repositories.ui.repo_details.RepoDetailsFragment"
+        android:label="@string/details"
+        tools:layout="@layout/fragment_repo_details"
         />
 
 </navigation>

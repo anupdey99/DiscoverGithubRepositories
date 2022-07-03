@@ -1,5 +1,10 @@
 package com.anupdey.app.discover_github_repositories.utils.ext
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
@@ -24,5 +29,25 @@ fun formatDate(input: String?, inputFormat: String = "yyyy-MM-dd'T'HH:mm:ss'Z'",
     } catch (e: Exception) {
         e.printStackTrace()
         input
+    }
+}
+
+fun isNetworkAvailable(application: Context): Boolean {
+    val connectivityManager = application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        val network = connectivityManager.activeNetwork ?: return false
+        val actNw = connectivityManager.getNetworkCapabilities(network) ?: return false
+        // Check if connected any network
+        actNw.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+        // Check if only WIFI/CELLULAR/ETHERNET/VPN
+        /*connected = when {
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_VPN) -> true
+            else -> false
+        }*/
+    } else {
+        connectivityManager.activeNetworkInfo?.isConnected == true
     }
 }

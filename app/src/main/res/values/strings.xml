@@ -8,4 +8,13 @@
     <string name="try_again">Try again</string>
     <string name="sort_by_star">Sort by star</string>
     <string name="sort_by_update_date">Sort by update date</string>
+    <string name="details">Details</string>
+    <string name="repo_owner">Repository owner</string>
+    <string name="repository_name">Repository name</string>
+    <string name="description">Description</string>
+    <string name="star_count">Star count</string>
+    <string name="fork_count">Fork count</string>
+    <string name="watch_count">Watch count</string>
+    <string name="updated_on">Updated on</string>
+    <string name="language">Language</string>
 </resources>

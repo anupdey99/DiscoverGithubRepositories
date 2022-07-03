@@ -9,6 +9,8 @@ import com.anupdey.app.discover_github_repositories.utils.AppConstant
 import com.anupdey.app.discover_github_repositories.utils.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -23,6 +25,13 @@ class RepoViewModel @Inject constructor(
     private val repoList: MutableList<RepoData> = mutableListOf()
     private val viewStateChannel = Channel<ViewState>()
     val viewStateEvent = viewStateChannel.receiveAsFlow()
+
+    private val _selectedRepo = MutableStateFlow<RepoData?>(null)
+    val selectedRepo: StateFlow<RepoData?> = _selectedRepo
+
+    init {
+        fetchTopRepos()
+    }
 
     fun fetchTopRepos() {
         viewModelScope.launch {
@@ -71,5 +80,9 @@ class RepoViewModel @Inject constructor(
             repoList.sortByDescending { it.updatedAt }
             viewStateChannel.send(ViewState.InitData(repoList))
         }
+    }
+
+    fun selectRepo(model: RepoData) {
+        _selectedRepo.value = model
     }
 }

@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anupdey.app.discover_github_repositories.R
 import com.anupdey.app.discover_github_repositories.databinding.FragmentTopRepositoryBinding
@@ -20,6 +21,7 @@ import com.anupdey.app.discover_github_repositories.utils.ext.showError
 import com.anupdey.app.discover_github_repositories.utils.ext.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -45,7 +47,7 @@ class TopRepositoryFragment: Fragment() {
         clickListeners()
         observerViewState()
         menuProvider()
-        viewModel.fetchTopRepos()
+        //viewModel.fetchTopRepos()
     }
 
     private fun initView() {
@@ -57,8 +59,10 @@ class TopRepositoryFragment: Fragment() {
     }
 
     private fun clickListeners() {
-        dataAdapter.setOnClickLister { item, _ ->
-
+        dataAdapter.setOnClickLister { item, _, _ ->
+            findNavController().navigate(TopRepositoryFragmentDirections.navRepoRepoDetails())
+            viewModel.selectRepo(item)
+            Timber.d("clickListeners $item")
         }
     }
 
@@ -77,7 +81,7 @@ class TopRepositoryFragment: Fragment() {
                             dataAdapter.differ.submitList(state.list.toList())
                             hideError(binding.errorView)
                             binding.recyclerView.postDelayed({
-                                binding.recyclerView.smoothScrollToPosition(0)
+                                binding.recyclerView.scrollToPosition(0)
                             }, 200L)
                         }
                         is ViewState.ShowError -> {
