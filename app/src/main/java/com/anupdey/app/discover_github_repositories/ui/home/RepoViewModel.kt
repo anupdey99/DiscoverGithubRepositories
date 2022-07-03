@@ -3,7 +3,7 @@ package com.anupdey.app.discover_github_repositories.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.anupdey.app.discover_github_repositories.data.remote.models.RepoData
-import com.anupdey.app.discover_github_repositories.repository.GithubRepository
+import com.anupdey.app.discover_github_repositories.data.repository.GithubRepository
 import com.anupdey.app.discover_github_repositories.ui.top_repo.ViewState
 import com.anupdey.app.discover_github_repositories.utils.AppConstant
 import com.anupdey.app.discover_github_repositories.utils.network.Resource

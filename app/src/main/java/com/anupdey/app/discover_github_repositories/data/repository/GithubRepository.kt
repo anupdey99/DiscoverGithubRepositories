@@ -1,4 +1,4 @@
-package com.anupdey.app.discover_github_repositories.repository
+package com.anupdey.app.discover_github_repositories.data.repository
 
 import com.anupdey.app.discover_github_repositories.data.remote.models.RepoData
 import com.anupdey.app.discover_github_repositories.utils.network.Resource

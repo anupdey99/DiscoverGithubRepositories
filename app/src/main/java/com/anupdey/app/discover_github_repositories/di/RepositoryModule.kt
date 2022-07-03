@@ -1,7 +1,7 @@
 package com.anupdey.app.discover_github_repositories.di
 
-import com.anupdey.app.discover_github_repositories.repository.GithubRepository
-import com.anupdey.app.discover_github_repositories.repository.GithubRepositoryImpl
+import com.anupdey.app.discover_github_repositories.data.repository.GithubRepository
+import com.anupdey.app.discover_github_repositories.data.repository.GithubRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
